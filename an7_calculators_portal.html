@@ -1,467 +1,577 @@
-
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AN7 Calculators — Referral Portal</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@2.44.0/tabler-icons.min.css">
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
 :root{
-  --an7-navy:#0D1F3C;
-  --an7-navy-mid:#1A3260;
-  --an7-navy-light:#E8EDF5;
-  --an7-black:#0A0A0A;
-  --an7-white:#FFFFFF;
-  --an7-gray:#F4F5F7;
-  --an7-gray-mid:#E2E5EA;
-  --an7-gray-text:#6B7280;
-  --an7-success:#1A7A4A;
-  --an7-success-bg:#E6F4ED;
-  --an7-danger:#B91C1C;
-  --an7-danger-bg:#FEE2E2;
-  --an7-warning-bg:#FFF7E6;
-  --an7-warning:#92610A;
+  --navy:#0D1F3C;
+  --navy-mid:#1A3260;
+  --navy-light:#E8EDF5;
+  --black:#0A0A0A;
+  --white:#FFFFFF;
+  --gray:#F4F5F7;
+  --gray-mid:#E2E5EA;
+  --gray-text:#6B7280;
+  --success:#1A7A4A;
+  --success-bg:#E6F4ED;
+  --danger:#B91C1C;
+  --danger-bg:#FEE2E2;
 }
-body{font-family:var(--font-sans);font-size:15px;color:var(--an7-black);background:transparent}
-.portal{padding:0}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;font-size:15px;color:var(--black);background:#ECEEF2;min-height:100vh;padding:24px 16px}
+.portal{max-width:720px;margin:0 auto;border-radius:12px;overflow:hidden;box-shadow:0 4px 24px rgba(0,0,0,0.10)}
 
-.header{background:var(--an7-navy);padding:18px 24px;border-radius:12px 12px 0 0;display:flex;align-items:center;justify-content:space-between}
+/* Header */
+.header{background:var(--navy);padding:18px 24px;display:flex;align-items:center;justify-content:space-between}
 .logo-area{display:flex;align-items:center;gap:12px}
-.logo-box{width:40px;height:40px;background:var(--an7-white);border-radius:8px;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:14px;color:var(--an7-navy);letter-spacing:-0.5px;flex-shrink:0}
-.brand-name{color:var(--an7-white);font-size:17px;font-weight:500;letter-spacing:0.01em}
+.logo-box{width:40px;height:40px;background:var(--white);border-radius:8px;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:14px;color:var(--navy);letter-spacing:-0.5px;flex-shrink:0}
+.brand-name{color:var(--white);font-size:17px;font-weight:600;letter-spacing:0.01em}
 .brand-sub{color:rgba(255,255,255,0.5);font-size:11px;margin-top:1px}
-.header-right{color:rgba(255,255,255,0.45);font-size:11px;text-align:right}
+.header-right{color:rgba(255,255,255,0.4);font-size:11px;text-align:right}
 
-.nav{display:flex;background:var(--an7-black);padding:0 24px}
-.nav-btn{padding:12px 18px;border:none;background:transparent;cursor:pointer;font-size:13px;color:rgba(255,255,255,0.5);font-family:var(--font-sans);border-bottom:2px solid transparent;transition:color 0.15s}
-.nav-btn.active{color:var(--an7-white);border-bottom-color:var(--an7-white)}
+/* Nav */
+.nav{display:flex;background:var(--black);padding:0 24px}
+.nav-btn{padding:12px 18px;border:none;background:transparent;cursor:pointer;font-size:13px;color:rgba(255,255,255,0.5);font-family:inherit;border-bottom:2px solid transparent;transition:color 0.15s;letter-spacing:0.01em}
+.nav-btn.active{color:var(--white);border-bottom-color:var(--white)}
 .nav-btn:hover:not(.active){color:rgba(255,255,255,0.8)}
 
-.body{background:var(--an7-gray);padding:24px;border-radius:0 0 12px 12px}
+/* Body */
+.body{background:var(--gray);padding:24px}
 
-.card{background:var(--an7-white);border:1px solid var(--an7-gray-mid);border-radius:10px;padding:20px 24px;margin-bottom:16px}
+/* Cards */
+.card{background:var(--white);border:1px solid var(--gray-mid);border-radius:10px;padding:20px 24px;margin-bottom:16px}
 .card:last-child{margin-bottom:0}
+.section-eyebrow{font-size:10px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:var(--gray-text);margin-bottom:12px;padding-bottom:8px;border-bottom:1px solid var(--gray-mid)}
 
-.section-eyebrow{font-size:10px;font-weight:500;letter-spacing:0.08em;text-transform:uppercase;color:var(--an7-gray-text);margin-bottom:10px;padding-bottom:8px;border-bottom:1px solid var(--an7-gray-mid)}
-
+/* Form */
 .form-row{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px}
 .form-row.full{grid-template-columns:1fr}
 .form-row.three{grid-template-columns:1fr 1fr 1fr}
+@media(max-width:520px){.form-row,.form-row.three{grid-template-columns:1fr}}
 .form-group{display:flex;flex-direction:column;gap:5px}
-label{font-size:11px;font-weight:500;color:var(--an7-gray-text);text-transform:uppercase;letter-spacing:0.05em}
-input,select{font-family:var(--font-sans);font-size:14px;padding:9px 11px;border:1px solid var(--an7-gray-mid);border-radius:7px;background:var(--an7-white);color:var(--an7-black);width:100%;transition:border-color 0.15s}
-input:focus,select:focus{outline:none;border-color:var(--an7-navy)}
-.error-msg{color:var(--an7-danger);font-size:11px;margin-top:2px;display:none}
+label{font-size:11px;font-weight:600;color:var(--gray-text);text-transform:uppercase;letter-spacing:0.05em}
+input,select{font-family:inherit;font-size:14px;padding:9px 11px;border:1px solid var(--gray-mid);border-radius:7px;background:var(--white);color:var(--black);width:100%;transition:border-color 0.15s}
+input:focus,select:focus{outline:none;border-color:var(--navy);box-shadow:0 0 0 3px rgba(13,31,60,0.08)}
+.error-msg{color:var(--danger);font-size:11px;margin-top:2px;display:none}
 
-.preview-bar{background:var(--an7-navy-light);border:1px solid #C5D2E8;border-radius:7px;padding:10px 14px;margin-bottom:14px;display:none;gap:20px;flex-wrap:wrap}
-.preview-bar span{font-size:12px;color:var(--an7-navy-mid)}
-.preview-bar strong{color:var(--an7-navy);font-weight:500}
+/* Preview bar */
+.preview-bar{background:var(--navy-light);border:1px solid #C5D2E8;border-radius:7px;padding:10px 14px;margin-bottom:14px;display:none;flex-wrap:wrap;gap:16px}
+.preview-bar span{font-size:12px;color:var(--navy-mid)}
+.preview-bar strong{color:var(--navy);font-weight:600}
 
-.btn-submit{width:100%;padding:11px;background:var(--an7-navy);color:var(--an7-white);border:none;border-radius:8px;font-size:14px;font-weight:500;cursor:pointer;font-family:var(--font-sans);margin-top:4px;letter-spacing:0.01em}
-.btn-submit:hover{background:var(--an7-navy-mid)}
+/* Buttons */
+.btn-submit{width:100%;padding:12px;background:var(--navy);color:var(--white);border:none;border-radius:8px;font-size:14px;font-weight:600;cursor:pointer;font-family:inherit;letter-spacing:0.01em;display:flex;align-items:center;justify-content:center;gap:8px}
+.btn-submit:hover{background:var(--navy-mid)}
 .btn-submit:active{opacity:0.9}
+.btn-sm{padding:5px 12px;font-size:12px;border:1px solid var(--gray-mid);border-radius:6px;background:var(--white);cursor:pointer;font-family:inherit;color:var(--black)}
+.btn-sm:hover{background:var(--gray)}
+.btn-export{padding:8px 16px;font-size:13px;border:1px solid var(--navy);border-radius:7px;background:var(--white);color:var(--navy);cursor:pointer;font-family:inherit;font-weight:600;display:flex;align-items:center;gap:6px}
+.btn-export:hover{background:var(--navy-light)}
 
-.btn-sm{padding:5px 12px;font-size:12px;border:1px solid var(--an7-gray-mid);border-radius:6px;background:var(--an7-white);cursor:pointer;font-family:var(--font-sans);color:var(--an7-black)}
-.btn-sm:hover{background:var(--an7-gray)}
-.btn-export{padding:8px 14px;font-size:13px;border:1px solid var(--an7-navy);border-radius:7px;background:var(--an7-white);color:var(--an7-navy);cursor:pointer;font-family:var(--font-sans);font-weight:500}
-.btn-export:hover{background:var(--an7-navy-light)}
+/* Success banner */
+.success-banner{background:var(--success-bg);border:1px solid #A7D4BC;color:var(--success);padding:11px 16px;border-radius:8px;margin-bottom:16px;font-size:13px;display:none;align-items:center;gap:8px}
 
-.success-banner{background:var(--an7-success-bg);border:1px solid #A7D4BC;color:var(--an7-success);padding:11px 16px;border-radius:8px;margin-bottom:16px;font-size:13px;display:none;align-items:center;gap:8px}
-
+/* Toggle */
 .toggle-row{display:flex;align-items:center;gap:10px;margin-top:6px}
-.toggle{width:40px;height:23px;border-radius:12px;background:var(--an7-gray-mid);border:none;cursor:pointer;position:relative;transition:background 0.2s;flex-shrink:0}
-.toggle.on{background:var(--an7-navy)}
+.toggle{width:40px;height:23px;border-radius:12px;background:var(--gray-mid);border:none;cursor:pointer;position:relative;transition:background 0.2s;flex-shrink:0}
+.toggle.on{background:var(--navy)}
 .toggle::after{content:'';position:absolute;width:17px;height:17px;border-radius:50%;background:white;top:3px;left:3px;transition:left 0.2s;box-shadow:0 1px 3px rgba(0,0,0,0.2)}
 .toggle.on::after{left:20px}
-.toggle-label{font-size:13px;color:var(--an7-gray-text)}
+.toggle-label{font-size:13px;color:var(--gray-text)}
 
+/* Dashboard stats */
 .stats-row{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:18px}
-.stat-card{background:var(--an7-white);border:1px solid var(--an7-gray-mid);border-radius:10px;padding:14px 16px}
-.stat-label{font-size:11px;color:var(--an7-gray-text);text-transform:uppercase;letter-spacing:0.06em;margin-bottom:5px}
-.stat-val{font-size:20px;font-weight:500;color:var(--an7-black)}
-.stat-val.danger{color:var(--an7-danger)}
+@media(max-width:520px){.stats-row{grid-template-columns:1fr 1fr}}
+.stat-card{background:var(--white);border:1px solid var(--gray-mid);border-radius:10px;padding:14px 16px}
+.stat-label{font-size:10px;color:var(--gray-text);text-transform:uppercase;letter-spacing:0.07em;margin-bottom:5px;font-weight:600}
+.stat-val{font-size:20px;font-weight:600;color:var(--black)}
+.stat-val.danger{color:var(--danger)}
 
+/* Toolbar */
 .toolbar{display:flex;gap:8px;margin-bottom:14px;align-items:center;flex-wrap:wrap}
 .toolbar select{width:auto;font-size:13px;padding:7px 10px;border-radius:7px}
 
-.tbl-wrap{background:var(--an7-white);border:1px solid var(--an7-gray-mid);border-radius:10px;overflow:auto}
+/* Table */
+.tbl-wrap{background:var(--white);border:1px solid var(--gray-mid);border-radius:10px;overflow:auto}
 table{width:100%;border-collapse:collapse;font-size:12px;table-layout:fixed}
-th{text-align:left;padding:9px 10px;border-bottom:1px solid var(--an7-gray-mid);color:var(--an7-gray-text);font-weight:500;font-size:11px;text-transform:uppercase;letter-spacing:0.05em;background:var(--an7-gray);white-space:nowrap}
-td{padding:9px 10px;border-bottom:1px solid var(--an7-gray-mid);vertical-align:middle;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:var(--an7-black)}
+th{text-align:left;padding:9px 10px;border-bottom:1px solid var(--gray-mid);color:var(--gray-text);font-weight:600;font-size:10px;text-transform:uppercase;letter-spacing:0.06em;background:var(--gray);white-space:nowrap}
+td{padding:9px 10px;border-bottom:1px solid var(--gray-mid);vertical-align:middle;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:var(--black)}
 tr:last-child td{border-bottom:none}
 tr:hover td{background:#FAFBFC}
 
-.badge{display:inline-block;font-size:10px;padding:2px 8px;border-radius:5px;font-weight:500}
-.badge-paid{background:var(--an7-success-bg);color:var(--an7-success)}
-.badge-unpaid{background:var(--an7-danger-bg);color:var(--an7-danger)}
-.ref-pill{display:inline-block;font-size:11px;padding:2px 8px;border-radius:5px;background:var(--an7-navy-light);color:var(--an7-navy-mid);font-weight:500}
+/* Badges */
+.badge{display:inline-block;font-size:10px;padding:2px 8px;border-radius:5px;font-weight:600}
+.badge-paid{background:var(--success-bg);color:var(--success)}
+.badge-unpaid{background:var(--danger-bg);color:var(--danger)}
+.ref-pill{display:inline-block;font-size:11px;padding:2px 8px;border-radius:5px;background:var(--navy-light);color:var(--navy-mid);font-weight:600}
 
+/* Lock screen */
 .lock-wrap{text-align:center;padding:2.5rem 1rem}
-.lock-icon{font-size:44px;color:var(--an7-gray-mid);display:block;margin-bottom:1rem}
-.lock-wrap p{color:var(--an7-gray-text);font-size:14px;margin-bottom:1rem}
+.lock-icon{font-size:44px;color:var(--gray-mid);display:block;margin-bottom:1rem}
+.lock-wrap p{color:var(--gray-text);font-size:14px;margin-bottom:1rem}
 .lock-wrap input{max-width:220px;margin:0 auto 0.75rem;display:block;text-align:center}
 .lock-wrap .btn-submit{max-width:220px;margin:0 auto}
-.pw-err{color:var(--an7-danger);font-size:12px;margin-bottom:8px;display:none}
+.pw-err{color:var(--danger);font-size:12px;margin-bottom:8px;display:none}
 
-.empty-msg{text-align:center;padding:2.5rem;color:var(--an7-gray-text);font-size:14px;display:none}
+.empty-msg{text-align:center;padding:2.5rem;color:var(--gray-text);font-size:14px;display:none}
+
+/* Footer */
+.footer{text-align:center;padding:16px;font-size:11px;color:var(--gray-text)}
 </style>
+</head>
+<body>
 
 <div class="portal">
-<h2 class="sr-only">AN7 Calculators — referral order portal</h2>
 
-<div class="header">
-  <div class="logo-area">
-    <div class="logo-box">AN7</div>
-    <div>
-      <div class="brand-name">AN7 Calculators</div>
-      <div class="brand-sub">Referral Order Portal</div>
-    </div>
-  </div>
-  <div class="header-right">Authorized referrers only</div>
-</div>
-
-<div class="nav">
-  <button class="nav-btn active" onclick="showPage('submit')" id="tab-submit">Submit Order</button>
-  <button class="nav-btn" onclick="showPage('dashboard')" id="tab-dashboard">Owner Dashboard</button>
-</div>
-
-<div class="body">
-
-<div id="page-submit">
-  <div id="success-msg" class="success-banner"><i class="ti ti-circle-check" aria-hidden="true"></i> Order submitted successfully. AN7 will be notified.</div>
-
-  <div class="card">
-    <div class="section-eyebrow">Referrer & date</div>
-    <div class="form-row">
-      <div class="form-group">
-        <label>Your name</label>
-        <select id="f-referrer">
-          <option value="">— select your name —</option>
-          <option>Imaz</option><option>Imantha</option><option>Kusal</option>
-          <option>Nipun</option><option>Binuka</option><option>Sayura</option><option>Vishwa M</option>
-        </select>
-        <span class="error-msg" id="err-referrer">Please select your name</span>
-      </div>
-      <div class="form-group">
-        <label>Date of sale</label>
-        <input type="date" id="f-date">
-        <span class="error-msg" id="err-date">Please enter the date</span>
+  <!-- Header -->
+  <div class="header">
+    <div class="logo-area">
+      <div class="logo-box">AN7</div>
+      <div>
+        <div class="brand-name">AN7 Calculators</div>
+        <div class="brand-sub">Referral Order Portal</div>
       </div>
     </div>
+    <div class="header-right">Authorized referrers only</div>
   </div>
 
-  <div class="card">
-    <div class="section-eyebrow">Customer details</div>
-    <div class="form-row">
-      <div class="form-group">
-        <label>Customer name</label>
-        <input type="text" id="f-name" placeholder="Full name">
-        <span class="error-msg" id="err-name">Please enter customer name</span>
-      </div>
-      <div class="form-group">
-        <label>Phone number</label>
-        <input type="tel" id="f-phone" placeholder="07X XXX XXXX">
-      </div>
-    </div>
-    <div class="form-row full">
-      <div class="form-group">
-        <label>Area / City</label>
-        <input type="text" id="f-area" placeholder="e.g. Peradeniya, Colombo">
-        <span class="error-msg" id="err-area">Please enter the area</span>
-      </div>
-    </div>
+  <!-- Nav -->
+  <div class="nav">
+    <button class="nav-btn active" onclick="showPage('submit')" id="tab-submit">Submit Order</button>
+    <button class="nav-btn" onclick="showPage('dashboard')" id="tab-dashboard">Owner Dashboard</button>
   </div>
 
-  <div class="card">
-    <div class="section-eyebrow">Product & pricing</div>
-    <div class="form-row">
-      <div class="form-group">
-        <label>Product</label>
-        <select id="f-product">
-          <option value="">— select product —</option>
-          <option value="CW">Casio fx-991 CW</option>
-          <option value="ES2C">Casio fx-991 ES plus 2nd HC</option>
-          <option value="EX">Casio fx-991 EX HC</option>
-          <option value="MS1">Casio fx-991 MS 1st edition</option>
-          <option value="MS2">Casio fx-991 MS 2nd edition</option>
-          <option value="ES2">Casio fx-991 ES plus 2nd</option>
-          <option value="ES1C">Casio fx-991 ES plus 1st HC</option>
-        </select>
-        <span class="error-msg" id="err-product">Please select a product</span>
-      </div>
-      <div class="form-group">
-        <label>Quantity</label>
-        <input type="number" id="f-qty" min="1" value="1" oninput="calcPreview()">
-        <span class="error-msg" id="err-qty">Required</span>
-      </div>
-    </div>
-    <div class="form-row three">
-      <div class="form-group">
-        <label>Selling price (Rs.)</label>
-        <input type="number" id="f-price" placeholder="7000" oninput="calcPreview()">
-        <span class="error-msg" id="err-price">Required</span>
-      </div>
-      <div class="form-group">
-        <label>Discount per unit (Rs.)</label>
-        <input type="number" id="f-discount" placeholder="0" value="0" oninput="calcPreview()">
-      </div>
-      <div class="form-group">
-        <label>Commission per unit (Rs.)</label>
-        <input type="number" id="f-commission" placeholder="0" value="0" oninput="calcPreview()">
-      </div>
-    </div>
-    <div class="preview-bar" id="preview-row">
-      <span>Revenue: <strong id="prev-rev">—</strong></span>
-      <span>Total discount: <strong id="prev-disc">—</strong></span>
-      <span>Total commission: <strong id="prev-comm">—</strong></span>
-    </div>
-  </div>
+  <!-- Body -->
+  <div class="body">
 
-  <div class="card">
-    <div class="section-eyebrow">Delivery & payment</div>
-    <div class="form-row">
-      <div class="form-group">
-        <label>Payment method</label>
-        <select id="f-payment">
-          <option value="Cash">Cash</option>
-          <option value="Bank transfer">Bank transfer</option>
-          <option value="COD">COD</option>
-          <option value="Card">Card</option>
-          <option value="NotYet">Not yet paid</option>
-        </select>
-      </div>
-      <div class="form-group">
-        <label>Delivery method</label>
-        <select id="f-delivery">
-          <option value="Me">Me</option>
-          <option value="SL Post">SL Post</option>
-          <option value="COD">COD</option>
-          <option value="Other">Other</option>
-          <option value="Pickedup">Picked up</option>
-        </select>
-      </div>
-    </div>
-    <div class="form-group">
-      <label>Commission paid to you?</label>
-      <div class="toggle-row">
-        <button class="toggle" id="toggle-paid" onclick="togglePaid()" aria-pressed="false" aria-label="Commission paid toggle"></button>
-        <span class="toggle-label" id="toggle-label">Not yet paid to me</span>
-      </div>
-    </div>
-    <button class="btn-submit" onclick="submitOrder()" style="margin-top:18px"><i class="ti ti-send" aria-hidden="true"></i> &nbsp;Submit Order</button>
-  </div>
-</div>
+    <!-- ===== SUBMIT PAGE ===== -->
+    <div id="page-submit">
 
-<div id="page-dashboard" style="display:none">
-  <div id="lock-screen" class="card">
-    <div class="lock-wrap">
-      <i class="ti ti-lock lock-icon" aria-hidden="true"></i>
-      <p>This area is restricted to AN7 Calculators owner only.</p>
-      <input type="password" id="pw-input" placeholder="Enter password" onkeydown="if(event.key==='Enter')checkPw()">
-      <p class="pw-err" id="pw-err">Incorrect password. Try again.</p>
-      <button class="btn-submit" onclick="checkPw()">Unlock Dashboard</button>
-    </div>
-  </div>
+      <div id="success-msg" class="success-banner">
+        <i class="ti ti-circle-check"></i> Order submitted successfully. AN7 will be notified.
+      </div>
 
-  <div id="dash-content" style="display:none">
-    <div class="stats-row" id="stats-row"></div>
-    <div class="toolbar">
-      <select id="filter-ref" onchange="renderTable()">
-        <option value="">All referrers</option>
-        <option>Imaz</option><option>Imantha</option><option>Kusal</option>
-        <option>Nipun</option><option>Binuka</option><option>Sayura</option><option>Vishwa M</option>
-      </select>
-      <select id="filter-paid" onchange="renderTable()">
-        <option value="">All commission status</option>
-        <option value="yes">Paid to me</option>
-        <option value="no">Not yet paid</option>
-      </select>
-      <button class="btn-export" onclick="exportCSV()"><i class="ti ti-download" aria-hidden="true"></i> Export to Excel</button>
-    </div>
-    <div class="tbl-wrap">
-      <table>
-        <thead>
-          <tr>
-            <th style="width:62px">Order ID</th>
-            <th style="width:72px">Date</th>
-            <th style="width:105px">Customer</th>
-            <th style="width:68px">Referrer</th>
-            <th style="width:48px">Product</th>
-            <th style="width:34px">Qty</th>
-            <th style="width:76px">Revenue</th>
-            <th style="width:62px">Discount</th>
-            <th style="width:76px">Commission</th>
-            <th style="width:70px">Payment</th>
-            <th style="width:62px">Paid to me</th>
-            <th style="width:64px">Action</th>
-          </tr>
-        </thead>
-        <tbody id="orders-tbody"></tbody>
-      </table>
-      <p class="empty-msg" id="empty-msg">No orders yet. Your referrers' submissions will appear here.</p>
-    </div>
-  </div>
-</div>
+      <div class="card">
+        <div class="section-eyebrow">Referrer &amp; date</div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Your name</label>
+            <select id="f-referrer">
+              <option value="">— select your name —</option>
+              <option>Imaz</option>
+              <option>Imantha</option>
+              <option>Kusal</option>
+              <option>Nipun</option>
+              <option>Binuka</option>
+              <option>Sayura</option>
+              <option>Vishwa M</option>
+            </select>
+            <span class="error-msg" id="err-referrer">Please select your name</span>
+          </div>
+          <div class="form-group">
+            <label>Date of sale</label>
+            <input type="date" id="f-date">
+            <span class="error-msg" id="err-date">Please enter the date</span>
+          </div>
+        </div>
+      </div>
 
-</div>
-</div>
+      <div class="card">
+        <div class="section-eyebrow">Customer details</div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Customer name</label>
+            <input type="text" id="f-name" placeholder="Full name">
+            <span class="error-msg" id="err-name">Please enter customer name</span>
+          </div>
+          <div class="form-group">
+            <label>Phone number</label>
+            <input type="tel" id="f-phone" placeholder="07X XXX XXXX">
+          </div>
+        </div>
+        <div class="form-row full">
+          <div class="form-group">
+            <label>Area / City</label>
+            <input type="text" id="f-area" placeholder="e.g. Peradeniya, Colombo">
+            <span class="error-msg" id="err-area">Please enter the area</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="section-eyebrow">Product &amp; pricing</div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Product</label>
+            <select id="f-product">
+              <option value="">— select product —</option>
+              <option value="CW">Casio fx-991 CW</option>
+              <option value="ES2C">Casio fx-991 ES plus 2nd HC</option>
+              <option value="EX">Casio fx-991 EX HC</option>
+              <option value="MS1">Casio fx-991 MS 1st edition</option>
+              <option value="MS2">Casio fx-991 MS 2nd edition</option>
+              <option value="ES2">Casio fx-991 ES plus 2nd</option>
+              <option value="ES1C">Casio fx-991 ES plus 1st HC</option>
+            </select>
+            <span class="error-msg" id="err-product">Please select a product</span>
+          </div>
+          <div class="form-group">
+            <label>Quantity</label>
+            <input type="number" id="f-qty" min="1" value="1" oninput="calcPreview()">
+            <span class="error-msg" id="err-qty">Required</span>
+          </div>
+        </div>
+        <div class="form-row three">
+          <div class="form-group">
+            <label>Selling price (Rs.)</label>
+            <input type="number" id="f-price" placeholder="7000" oninput="calcPreview()">
+            <span class="error-msg" id="err-price">Required</span>
+          </div>
+          <div class="form-group">
+            <label>Discount / unit (Rs.)</label>
+            <input type="number" id="f-discount" placeholder="0" value="0" oninput="calcPreview()">
+          </div>
+          <div class="form-group">
+            <label>Commission / unit (Rs.)</label>
+            <input type="number" id="f-commission" placeholder="0" value="0" oninput="calcPreview()">
+          </div>
+        </div>
+        <div class="preview-bar" id="preview-row">
+          <span>Revenue: <strong id="prev-rev">—</strong></span>
+          <span>Total discount: <strong id="prev-disc">—</strong></span>
+          <span>Total commission: <strong id="prev-comm">—</strong></span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="section-eyebrow">Delivery &amp; payment</div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Payment method</label>
+            <select id="f-payment">
+              <option value="Cash">Cash</option>
+              <option value="Bank transfer">Bank transfer</option>
+              <option value="COD">COD</option>
+              <option value="Card">Card</option>
+              <option value="NotYet">Not yet paid</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Delivery method</label>
+            <select id="f-delivery">
+              <option value="Me">Me</option>
+              <option value="SL Post">SL Post</option>
+              <option value="COD">COD</option>
+              <option value="Other">Other</option>
+              <option value="Pickedup">Picked up</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Commission paid to you?</label>
+          <div class="toggle-row">
+            <button class="toggle" id="toggle-paid" onclick="togglePaid()" aria-pressed="false" aria-label="Commission paid toggle"></button>
+            <span class="toggle-label" id="toggle-label">Not yet paid to me</span>
+          </div>
+        </div>
+        <button class="btn-submit" onclick="submitOrder()" style="margin-top:18px">
+          <i class="ti ti-send"></i> Submit Order
+        </button>
+      </div>
+
+    </div><!-- /page-submit -->
+
+    <!-- ===== DASHBOARD PAGE ===== -->
+    <div id="page-dashboard" style="display:none">
+
+      <div id="lock-screen" class="card">
+        <div class="lock-wrap">
+          <i class="ti ti-lock lock-icon"></i>
+          <p>This area is restricted to AN7 Calculators owner only.</p>
+          <input type="password" id="pw-input" placeholder="Enter password" onkeydown="if(event.key==='Enter')checkPw()">
+          <p class="pw-err" id="pw-err">Incorrect password. Try again.</p>
+          <button class="btn-submit" onclick="checkPw()">Unlock Dashboard</button>
+        </div>
+      </div>
+
+      <div id="dash-content" style="display:none">
+        <div class="stats-row" id="stats-row"></div>
+        <div class="toolbar">
+          <select id="filter-ref" onchange="renderTable()">
+            <option value="">All referrers</option>
+            <option>Imaz</option><option>Imantha</option><option>Kusal</option>
+            <option>Nipun</option><option>Binuka</option><option>Sayura</option><option>Vishwa M</option>
+          </select>
+          <select id="filter-paid" onchange="renderTable()">
+            <option value="">All commission status</option>
+            <option value="yes">Paid to me</option>
+            <option value="no">Not yet paid</option>
+          </select>
+          <button class="btn-export" onclick="exportCSV()">
+            <i class="ti ti-download"></i> Export to Excel
+          </button>
+        </div>
+        <div class="tbl-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th style="width:62px">Order ID</th>
+                <th style="width:72px">Date</th>
+                <th style="width:100px">Customer</th>
+                <th style="width:68px">Referrer</th>
+                <th style="width:48px">Product</th>
+                <th style="width:34px">Qty</th>
+                <th style="width:76px">Revenue</th>
+                <th style="width:60px">Discount</th>
+                <th style="width:76px">Commission</th>
+                <th style="width:68px">Payment</th>
+                <th style="width:60px">Paid to me</th>
+                <th style="width:62px">Action</th>
+              </tr>
+            </thead>
+            <tbody id="orders-tbody"></tbody>
+          </table>
+          <p class="empty-msg" id="empty-msg">No orders yet. Your referrers' submissions will appear here.</p>
+        </div>
+      </div>
+
+    </div><!-- /page-dashboard -->
+
+  </div><!-- /body -->
+
+  <div class="footer">AN7 Calculators &copy; 2026 &nbsp;·&nbsp; All rights reserved</div>
+
+</div><!-- /portal -->
 
 <script>
-const PASS='admin123';
-const PRODUCTS={CW:'Casio fx-991 CW',ES2C:'Casio fx-991 ES plus 2nd HC',EX:'Casio fx-991 EX HC',MS1:'Casio fx-991 MS 1st ed.',MS2:'Casio fx-991 MS 2nd ed.',ES2:'Casio fx-991 ES plus 2nd',ES1C:'Casio fx-991 ES plus 1st HC'};
-let paidToggle=false,unlocked=false,orders=[];
+// ── CONFIG ────────────────────────────────────────────────
+const PASS = 'admin123'; // Change this to your own password
+const STORAGE_KEY = 'an7_orders';
+const PRODUCTS = {
+  CW:   'Casio fx-991 CW',
+  ES2C: 'Casio fx-991 ES plus 2nd HC',
+  EX:   'Casio fx-991 EX HC',
+  MS1:  'Casio fx-991 MS 1st edition',
+  MS2:  'Casio fx-991 MS 2nd edition',
+  ES2:  'Casio fx-991 ES plus 2nd',
+  ES1C: 'Casio fx-991 ES plus 1st HC'
+};
 
-async function loadOrders(){try{const r=await window.storage.get('referral_orders');orders=r?JSON.parse(r.value):[]}catch(e){orders=[]}}
-async function saveOrders(){await window.storage.set('referral_orders',JSON.stringify(orders))}
+// ── STATE ─────────────────────────────────────────────────
+let paidToggle = false;
+let unlocked   = false;
+let orders     = [];
 
-function showPage(p){
-  document.getElementById('page-submit').style.display=p==='submit'?'':'none';
-  document.getElementById('page-dashboard').style.display=p==='dashboard'?'':'none';
-  document.getElementById('tab-submit').className='nav-btn'+(p==='submit'?' active':'');
-  document.getElementById('tab-dashboard').className='nav-btn'+(p==='dashboard'?' active':'');
-  if(p==='dashboard'&&unlocked)renderDash();
+// ── STORAGE (localStorage for GitHub hosting) ─────────────
+function loadOrders() {
+  try { orders = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]'); }
+  catch(e) { orders = []; }
+}
+function saveOrders() {
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(orders));
 }
 
-function togglePaid(){
-  paidToggle=!paidToggle;
-  const t=document.getElementById('toggle-paid');
-  t.className='toggle'+(paidToggle?' on':'');
-  t.setAttribute('aria-pressed',paidToggle);
-  document.getElementById('toggle-label').textContent=paidToggle?'Paid to me ✓':'Not yet paid to me';
+// ── NAV ───────────────────────────────────────────────────
+function showPage(p) {
+  document.getElementById('page-submit').style.display    = p === 'submit'    ? '' : 'none';
+  document.getElementById('page-dashboard').style.display = p === 'dashboard' ? '' : 'none';
+  document.getElementById('tab-submit').className    = 'nav-btn' + (p === 'submit'    ? ' active' : '');
+  document.getElementById('tab-dashboard').className = 'nav-btn' + (p === 'dashboard' ? ' active' : '');
+  if (p === 'dashboard' && unlocked) renderDash();
 }
 
-function calcPreview(){
-  const qty=parseInt(document.getElementById('f-qty').value)||1;
-  const price=parseFloat(document.getElementById('f-price').value)||0;
-  const disc=parseFloat(document.getElementById('f-discount').value)||0;
-  const comm=parseFloat(document.getElementById('f-commission').value)||0;
-  const pr=document.getElementById('preview-row');
-  if(!price){pr.style.display='none';return}
-  pr.style.display='flex';
-  document.getElementById('prev-rev').textContent='Rs.'+(price*qty).toLocaleString();
-  document.getElementById('prev-disc').textContent='Rs.'+(disc*qty).toLocaleString();
-  document.getElementById('prev-comm').textContent='Rs.'+(comm*qty).toLocaleString();
+// ── TOGGLE ────────────────────────────────────────────────
+function togglePaid() {
+  paidToggle = !paidToggle;
+  const t = document.getElementById('toggle-paid');
+  t.className = 'toggle' + (paidToggle ? ' on' : '');
+  t.setAttribute('aria-pressed', paidToggle);
+  document.getElementById('toggle-label').textContent = paidToggle ? 'Paid to me ✓' : 'Not yet paid to me';
 }
 
-function validate(){
-  let ok=true;
-  [['f-referrer','err-referrer'],['f-date','err-date'],['f-name','err-name'],['f-area','err-area'],['f-product','err-product'],['f-qty','err-qty'],['f-price','err-price']].forEach(([f,e])=>{
-    const el=document.getElementById(f),err=document.getElementById(e);
-    if(err){if(!el.value.trim()){err.style.display='block';ok=false}else err.style.display='none'}
+// ── LIVE PREVIEW ──────────────────────────────────────────
+function calcPreview() {
+  const qty   = parseInt(document.getElementById('f-qty').value)        || 1;
+  const price = parseFloat(document.getElementById('f-price').value)    || 0;
+  const disc  = parseFloat(document.getElementById('f-discount').value) || 0;
+  const comm  = parseFloat(document.getElementById('f-commission').value)|| 0;
+  const pr = document.getElementById('preview-row');
+  if (!price) { pr.style.display = 'none'; return; }
+  pr.style.display = 'flex';
+  document.getElementById('prev-rev').textContent  = 'Rs.' + (price * qty).toLocaleString();
+  document.getElementById('prev-disc').textContent = 'Rs.' + (disc  * qty).toLocaleString();
+  document.getElementById('prev-comm').textContent = 'Rs.' + (comm  * qty).toLocaleString();
+}
+
+// ── VALIDATION ────────────────────────────────────────────
+function validate() {
+  let ok = true;
+  [['f-referrer','err-referrer'],['f-date','err-date'],['f-name','err-name'],
+   ['f-area','err-area'],['f-product','err-product'],['f-qty','err-qty'],['f-price','err-price']
+  ].forEach(([f, e]) => {
+    const el  = document.getElementById(f);
+    const err = document.getElementById(e);
+    if (err) {
+      if (!el.value.trim()) { err.style.display = 'block'; ok = false; }
+      else err.style.display = 'none';
+    }
   });
   return ok;
 }
 
-function nextId(){
-  if(!orders.length)return 'ORD0001';
-  return 'ORD'+(Math.max(...orders.map(o=>parseInt(o.id.replace('ORD',''))))+1).toString().padStart(4,'0');
+// ── ORDER ID ──────────────────────────────────────────────
+function nextId() {
+  if (!orders.length) return 'ORD0001';
+  const nums = orders.map(o => parseInt(o.id.replace('ORD', '')));
+  return 'ORD' + (Math.max(...nums) + 1).toString().padStart(4, '0');
 }
 
-async function submitOrder(){
-  if(!validate())return;
-  const qty=parseInt(document.getElementById('f-qty').value)||1;
-  const price=parseFloat(document.getElementById('f-price').value)||0;
-  const disc=parseFloat(document.getElementById('f-discount').value)||0;
-  const comm=parseFloat(document.getElementById('f-commission').value)||0;
+// ── SUBMIT ────────────────────────────────────────────────
+function submitOrder() {
+  if (!validate()) return;
+  const qty   = parseInt(document.getElementById('f-qty').value)         || 1;
+  const price = parseFloat(document.getElementById('f-price').value)     || 0;
+  const disc  = parseFloat(document.getElementById('f-discount').value)  || 0;
+  const comm  = parseFloat(document.getElementById('f-commission').value) || 0;
+
   orders.push({
-    id:nextId(),date:document.getElementById('f-date').value,
-    referrer:document.getElementById('f-referrer').value,
-    name:document.getElementById('f-name').value.trim(),
-    phone:document.getElementById('f-phone').value.trim(),
-    area:document.getElementById('f-area').value.trim(),
-    productCode:document.getElementById('f-product').value,
-    productName:PRODUCTS[document.getElementById('f-product').value],
-    qty,price,discount:disc,commission:comm,
-    revenue:price*qty,totalDiscount:disc*qty,totalCommission:comm*qty,
-    payment:document.getElementById('f-payment').value,
-    delivery:document.getElementById('f-delivery').value,
-    paidToMe:paidToggle,status:'Pending'
+    id:              nextId(),
+    date:            document.getElementById('f-date').value,
+    referrer:        document.getElementById('f-referrer').value,
+    name:            document.getElementById('f-name').value.trim(),
+    phone:           document.getElementById('f-phone').value.trim(),
+    area:            document.getElementById('f-area').value.trim(),
+    productCode:     document.getElementById('f-product').value,
+    productName:     PRODUCTS[document.getElementById('f-product').value],
+    qty,
+    price,
+    discount:        disc,
+    commission:      comm,
+    revenue:         price * qty,
+    totalDiscount:   disc  * qty,
+    totalCommission: comm  * qty,
+    payment:         document.getElementById('f-payment').value,
+    delivery:        document.getElementById('f-delivery').value,
+    paidToMe:        paidToggle,
+    status:          'Pending'
   });
-  await saveOrders();
-  const b=document.getElementById('success-msg');
-  b.style.display='flex';setTimeout(()=>b.style.display='none',4000);
-  ['f-name','f-phone','f-area','f-price','f-discount','f-commission'].forEach(id=>document.getElementById(id).value='');
-  document.getElementById('f-qty').value='1';
-  document.getElementById('f-referrer').value='';
-  document.getElementById('f-product').value='';
-  document.getElementById('f-payment').value='Cash';
-  document.getElementById('f-delivery').value='Me';
-  document.getElementById('preview-row').style.display='none';
-  if(paidToggle)togglePaid();
+  saveOrders();
+
+  const b = document.getElementById('success-msg');
+  b.style.display = 'flex';
+  setTimeout(() => b.style.display = 'none', 4000);
+
+  ['f-name','f-phone','f-area','f-price','f-discount','f-commission']
+    .forEach(id => document.getElementById(id).value = '');
+  document.getElementById('f-qty').value        = '1';
+  document.getElementById('f-referrer').value   = '';
+  document.getElementById('f-product').value    = '';
+  document.getElementById('f-payment').value    = 'Cash';
+  document.getElementById('f-delivery').value   = 'Me';
+  document.getElementById('preview-row').style.display = 'none';
+  if (paidToggle) togglePaid();
 }
 
-function checkPw(){
-  if(document.getElementById('pw-input').value===PASS){
-    unlocked=true;
-    document.getElementById('lock-screen').style.display='none';
-    document.getElementById('dash-content').style.display='';
+// ── AUTH ──────────────────────────────────────────────────
+function checkPw() {
+  if (document.getElementById('pw-input').value === PASS) {
+    unlocked = true;
+    document.getElementById('lock-screen').style.display  = 'none';
+    document.getElementById('dash-content').style.display = '';
     renderDash();
-  }else document.getElementById('pw-err').style.display='block';
+  } else {
+    document.getElementById('pw-err').style.display = 'block';
+  }
 }
 
-function filtered(){
-  const fRef=document.getElementById('filter-ref').value;
-  const fPaid=document.getElementById('filter-paid').value;
-  let d=[...orders];
-  if(fRef)d=d.filter(o=>o.referrer===fRef);
-  if(fPaid==='yes')d=d.filter(o=>o.paidToMe);
-  if(fPaid==='no')d=d.filter(o=>!o.paidToMe);
+// ── FILTER ────────────────────────────────────────────────
+function filtered() {
+  const fRef  = document.getElementById('filter-ref').value;
+  const fPaid = document.getElementById('filter-paid').value;
+  let d = [...orders];
+  if (fRef)         d = d.filter(o => o.referrer === fRef);
+  if (fPaid === 'yes') d = d.filter(o => o.paidToMe);
+  if (fPaid === 'no')  d = d.filter(o => !o.paidToMe);
   return d;
 }
 
-function renderDash(){renderStats();renderTable()}
+// ── DASHBOARD ─────────────────────────────────────────────
+function renderDash() { renderStats(); renderTable(); }
 
-function renderStats(){
-  const d=filtered();
-  const rev=d.reduce((s,o)=>s+o.revenue,0);
-  const comm=d.reduce((s,o)=>s+(o.totalCommission||0),0);
-  const unpaid=d.filter(o=>!o.paidToMe).length;
-  document.getElementById('stats-row').innerHTML=`
+function renderStats() {
+  const d      = filtered();
+  const rev    = d.reduce((s, o) => s + o.revenue, 0);
+  const comm   = d.reduce((s, o) => s + (o.totalCommission || 0), 0);
+  const unpaid = d.filter(o => !o.paidToMe).length;
+  document.getElementById('stats-row').innerHTML = `
     <div class="stat-card"><div class="stat-label">Total orders</div><div class="stat-val">${d.length}</div></div>
     <div class="stat-card"><div class="stat-label">Revenue (Rs.)</div><div class="stat-val">${rev.toLocaleString()}</div></div>
     <div class="stat-card"><div class="stat-label">Commissions (Rs.)</div><div class="stat-val">${comm.toLocaleString()}</div></div>
     <div class="stat-card"><div class="stat-label">Unpaid to me</div><div class="stat-val danger">${unpaid}</div></div>`;
 }
 
-function renderTable(){
+function renderTable() {
   renderStats();
-  const d=filtered();
-  const tbody=document.getElementById('orders-tbody');
-  const empty=document.getElementById('empty-msg');
-  if(!d.length){tbody.innerHTML='';empty.style.display='block';return}
-  empty.style.display='none';
-  tbody.innerHTML=d.map(o=>{
-    const gi=orders.findIndex(x=>x.id===o.id);
+  const d     = filtered();
+  const tbody = document.getElementById('orders-tbody');
+  const empty = document.getElementById('empty-msg');
+  if (!d.length) { tbody.innerHTML = ''; empty.style.display = 'block'; return; }
+  empty.style.display = 'none';
+  tbody.innerHTML = d.map(o => {
+    const gi = orders.findIndex(x => x.id === o.id);
     return `<tr>
-      <td style="color:var(--an7-gray-text);font-size:11px">${o.id}</td>
+      <td style="color:var(--gray-text);font-size:11px">${o.id}</td>
       <td>${o.date}</td>
       <td title="${o.name} · ${o.phone}">${o.name}</td>
-      <td><span class="ref-pill">${o.referrer||'-'}</span></td>
+      <td><span class="ref-pill">${o.referrer || '-'}</span></td>
       <td title="${o.productName}">${o.productCode}</td>
       <td>${o.qty}</td>
       <td>Rs.${o.revenue.toLocaleString()}</td>
-      <td>${o.totalDiscount?'Rs.'+o.totalDiscount.toLocaleString():'-'}</td>
-      <td>${o.totalCommission?'Rs.'+o.totalCommission.toLocaleString():'-'}</td>
+      <td>${o.totalDiscount ? 'Rs.' + o.totalDiscount.toLocaleString() : '-'}</td>
+      <td>${o.totalCommission ? 'Rs.' + o.totalCommission.toLocaleString() : '-'}</td>
       <td>${o.payment}</td>
-      <td><span class="badge ${o.paidToMe?'badge-paid':'badge-unpaid'}">${o.paidToMe?'Paid':'Unpaid'}</span></td>
-      <td><button class="btn-sm" onclick="toggleOrderPaid(${gi})">${o.paidToMe?'Undo':'Mark paid'}</button></td>
+      <td><span class="badge ${o.paidToMe ? 'badge-paid' : 'badge-unpaid'}">${o.paidToMe ? 'Paid' : 'Unpaid'}</span></td>
+      <td><button class="btn-sm" onclick="toggleOrderPaid(${gi})">${o.paidToMe ? 'Undo' : 'Mark paid'}</button></td>
     </tr>`;
   }).join('');
 }
 
-async function toggleOrderPaid(i){
-  orders[i].paidToMe=!orders[i].paidToMe;
-  await saveOrders();
+async function toggleOrderPaid(i) {
+  orders[i].paidToMe = !orders[i].paidToMe;
+  saveOrders();
   renderTable();
 }
 
-function exportCSV(){
-  const d=filtered();
-  const headers=['OrderID','Date','Name','Contact','Area','Product','Product name','Quantity','Selling price','Revenue','Discount per unit','Total Discount','Commission per unit','Total Commission','Payment','Delivery','Refferal','Status','Paid to me'];
-  const rows=d.map(o=>[o.id,o.date,o.name,o.phone||'',o.area,o.productCode,o.productName,o.qty,o.price,o.revenue,o.discount||0,o.totalDiscount||0,o.commission||0,o.totalCommission||0,o.payment,o.delivery,o.referrer,o.status,o.paidToMe?'Yes':'No']);
-  const csv=[headers,...rows].map(r=>r.map(v=>`"${String(v).replace(/"/g,'""')}"`).join(',')).join('\n');
-  const a=document.createElement('a');
-  a.href='data:text/csv;charset=utf-8,\uFEFF'+encodeURIComponent(csv);
-  a.download='AN7_Orders_'+new Date().toISOString().slice(0,10)+'.csv';
+// ── EXPORT ────────────────────────────────────────────────
+function exportCSV() {
+  const d = filtered();
+  const headers = ['OrderID','Date','Name','Contact','Area','Product','Product name',
+    'Quantity','Selling price','Revenue','Discount per unit','Total Discount',
+    'Commission per unit','Total Commission','Payment','Delivery','Refferal','Status','Paid to me'];
+  const rows = d.map(o => [
+    o.id, o.date, o.name, o.phone || '', o.area,
+    o.productCode, o.productName, o.qty, o.price, o.revenue,
+    o.discount || 0, o.totalDiscount || 0,
+    o.commission || 0, o.totalCommission || 0,
+    o.payment, o.delivery, o.referrer, o.status,
+    o.paidToMe ? 'Yes' : 'No'
+  ]);
+  const csv = [headers, ...rows]
+    .map(r => r.map(v => `"${String(v).replace(/"/g, '""')}"`).join(','))
+    .join('\n');
+  const a = document.createElement('a');
+  a.href = 'data:text/csv;charset=utf-8,\uFEFF' + encodeURIComponent(csv);
+  a.download = 'AN7_Orders_' + new Date().toISOString().slice(0, 10) + '.csv';
   a.click();
 }
 
-document.getElementById('f-qty').addEventListener('input',calcPreview);
-document.getElementById('f-date').value=new Date().toISOString().slice(0,10);
+// ── INIT ──────────────────────────────────────────────────
+document.getElementById('f-qty').addEventListener('input', calcPreview);
+document.getElementById('f-date').value = new Date().toISOString().slice(0, 10);
 loadOrders();
 </script>
+</body>
+</html>
